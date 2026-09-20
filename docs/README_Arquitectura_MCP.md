@@ -1,6 +1,5 @@
 # TAREA 1 - MCP Y SISTEMA DE ARCHIVOS
-Investigación e implementación de un MCP
-
+Investigación 
 **4. ARQUITECTURA DE MCP**
 
 El Model Context Protocol (MCP) sigue una arquitectura con tres roles. El host es la aplicación de IA con la que interactúa la persona usuaria, por ejemplo un asistente conversacional o un editor con IA. Crea y administra los clientes, controla sus permisos y su ciclo de vida, aplica las políticas de seguridad y de consentimiento, toma las decisiones de autorización y coordina la integración con el modelo de lenguaje. Cada cliente es un componente que el host crea para comunicarse con exactamente un servidor, de modo que la relación entre clientes y servidores es 1:1. Además, adjunta a cada petición la versión del protocolo y sus capacidades. La documentación aclara que el host es la aplicación con la que se interactúa, mientras que los clientes son los componentes a nivel de protocolo que hacen posibles las conexiones. Por último, el servidor es el programa que ofrece contexto y capacidades especializadas mediante las primitivas de MCP. Puede ser un proceso local o un servicio remoto y debe respetar las restricciones de seguridad. Los mensajes entre cliente y servidor usan JSON-RPC 2.0.

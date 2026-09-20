@@ -1,6 +1,5 @@
 # TAREA 1 - MCP Y SISTEMA DE ARCHIVOS
-Investigación e implementación de un MCP
-
+Investigación 
 **1.- Evolución de los modelos**
 
 **Definición de un LM*
