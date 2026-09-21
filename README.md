@@ -1,22 +1,48 @@
 # TAREA 1 - MCP Y SISTEMA DE ARCHIVOS
 Investigación e implementación de un MCP
 
-**1.- Evolución de los modelos**
 
-**Definición de un LLM*
+**1. ELECCIÓN DEL CLIENTE**
 
-Un lenguaje LLM son una categoría de modelos de aprendizaje profundo entrenados con una inmensa cantidades de datos, lo que lo hace capaz de comprender y generar un lenguaje natural y otros tipos de contenido para realizar una amplia gamas de tareas. Los LLM se basan en la arquitectura de redes neuronales llamados transformador que se destaca en en el manejo de de secuencias de palabras y la caputra de patrones de texto.Los LLM funcionan cómo maquinas gigantes de predicción estadistica que predicen rapidamente la siguiente palabra de una secuencia, apreden de patrones de texto y generan  un lenguaje  que sigue esos patrones.
+**Cliente elegido:** Visual Studio Code con GitHub Copilot (modo agente), versión [completar con la versión instalada], sobre [sistema operativo y versión].
 
-Los LLM representan un gran salto en la que los humanos interactuán con la tecnología porque son el primer sistema de IA que puede manejar el lenguaje humano no estrcuturado a escala, lo que permite una comunicación natural con las maquinas. Mientras que los motores de busqueda de busqueda tradicionales y otros sistemas programados emplean algoritmos  para hacer coincidir palabras clave, los LLM capturan un contexto, matrices y razonamiento más profundo.
+### Justificación
 
-**Evolución del lenguaje LLM*
+1. **Es el entorno donde se desarrolla el proyecto.** Como además de esta práctica se desarrollará un proyecto con la herramienta, se buscó un cliente que también fuera un entorno de desarrollo completo. En VS Code se redactan la documentación y el código, se usa la terminal y se lleva el control de versiones. En modo agente, Copilot planifica el trabajo, determina los archivos y el contexto relevantes, edita el código e invoca herramientas (Microsoft, s. f.-c).
 
-Los LLM son la colminación de décadas de progreso en procesamiento de lenguajen natural (PLN) e investigación en machine learning, y su desarrollo es en gran parte del auge en los avances en inteligencia artificial a finales de la década 2010 y 2020. Se centran en la comprensión y generación del lenguaje humano, basados en el estudio de la semántica, que explora la organización, evolución y conexión de las palabras dentro de un idioma. El desarollo de estos lenguajes comenzó con algoritmos más sencillos, pero han evolucionado tanto hasta emplear enfoques de aprendizaje profundo que utilizan una gran cantidad de parámetros.
+2. **Soporta MCP con una configuración transparente.** Los servidores se definen en un archivo `mcp.json`, ubicado en el espacio de trabajo (`.vscode/mcp.json`) o en el perfil de usuario, con autocompletado para editarlo. El archivo tiene una sección `servers` con los servidores y una sección opcional `inputs` para datos sensibles como claves.
 
-Su evolución comenzó con el estudio de cómo las palabras se interconectan dentro del marco del lenguaje y cómo transmiten significado, lo que condujo a la creación de modelos fundamentales de aprendizaje automático. Surgió el concepto de modelos de espacio vectorial , donde las palabras se representaban como vectores (incrustaciones de palabras), lo que permitía a las máquinas capturar la similitud semántica. Posteriormente, se produjeron avances como las redes neuronales recurrentes (RNN) y las redes de memoria a largo y corto plazo (LSTM), capaces de procesar secuencias de palabras, algo fundamental para tareas como la traducción automática.
+3. **Facilita verificar el servidor y sus herramientas.** VS Code permite iniciar, detener, deshabilitar y consultar los registros de cada servidor, por ejemplo con el comando `MCP: List Servers`. Un servidor deshabilitado no arranca y sus herramientas quedan fuera del chat. Además, el agente cuenta con un selector para configurar qué herramientas puede usar.
 
-Los modelos de lenguaje natural ( LLM) actuales, como GPT-3.5 y T5 de Google , no solo son expertos en la generación de texto, sino también en la clasificación, el resumen y la respuesta a preguntas. Estos modelos se benefician de una mayor capacidad de procesamiento y conjuntos de datos de entrenamiento más amplios, lo que permite una comprensión del lenguaje más compleja y matizada. Innovaciones como el aprendizaje autosupervisado , el ajuste de instrucciones y el aprovechamiento de la retroalimentación humana durante el entrenamiento han mejorado significativamente el rendimiento y las aplicaciones prácticas.
+4. **Incorpora seguridad.** Si la persona no confía en un servidor, este no se inicia y el chat continúa sin sus herramientas. Antes de una llamada a una herramienta, el agente puede pedir aprobación, y la persona debe revisar la acción y aprobarla si corresponde con la tarea. Esto permite documentar la confirmación humana descrita en la sección 6.
 
-**Bibliografias**
-https://www.ibm.com/mx-es/think/topics/large-language-models
-https://parsio.io/blog/a-brief-history-of-llm/
+5. **Es accesible.** El plan gratuito de GitHub Copilot admite el modo agente, aunque con límites de uso que pueden cambiar.
+
+6. **Permite ampliar el trabajo.** El mismo editor sirve para escribir, ejecutar y conectar un servidor MCP propio.
+
+### Limitaciones de la elección
+
+- El modo agente requiere una cuenta de GitHub con acceso a Copilot y está sujeto a cuotas de uso.
+- Ejecutar el servidor con `npx` requiere tener Node.js instalado.
+- El agente tiene herramientas integradas propias; deben distinguirse de las del servidor MCP al documentar las pruebas.
+
+### Actualización de la sección 4.1 (roles en el ejemplo instalado)
+
+| Rol | Quién lo cumple en el ejemplo |
+|---|---|
+| Host | Visual Studio Code con GitHub Copilot: la aplicación con la que se conversa, que contiene el chat y muestra las solicitudes de aprobación |
+| Cliente MCP | Componente interno de VS Code que el host crea para hablar con el servidor `filesystem` |
+| Servidor MCP | El paquete `@modelcontextprotocol/server-filesystem`, que el host lanza con `npx` como proceso hijo |
+| Modelo | El modelo seleccionado en el chat de Copilot, que decide qué herramienta conviene usar |
+| Usuario | Formula la petición y aprueba cada operación antes de que se ejecute |
+
+**2. INSTALACIÓN DEL SERVIDOR DE SISTEMA DE ARCHIVOS**
+
+
+### Referencias
+
+Anthropic. (s. f.-a). *Connect Claude Code to tools via MCP*. Claude Code Docs. https://code.claude.com/docs/en/mcp
+
+Anthropic. (s. f.-b). *Overview*. Claude Code Docs. https://code.claude.com/docs/en/overview
+
+Cursor. (s. f.-a). *Agent overview*. Cursor Docs. https://cursor.com/docs/agent/overview
