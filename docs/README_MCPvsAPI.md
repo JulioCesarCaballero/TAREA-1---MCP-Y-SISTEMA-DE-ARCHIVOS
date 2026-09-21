@@ -31,7 +31,7 @@ Las API de REST ofrecen cuatro beneficios principales:
 El MCP crea una conexión bidireccional estandarizada para las aplicaciones de IA, lo que permite que los LLM se conecten fácilmente con varias fuentes de datos y herramientas. MCP se basa en conceptos existentes como el uso de herramientas y la llamada a funciones, pero los estandariza. Esto reduce la necesidad de conexiones personalizadas para cada nuevo modelo de IA y sistema externo. Donde permite que los LLM usen datos actuales del mundo real, realicen acciones y accedan a funciones especializadas que no se incluyen en su entrenamiento original.
 
 En MCP, un servidor publico da un catálogo de herramientas (*tools*), donde cada una se identifica con un nombre único y se describe con una explicación en lenguaje natural y un esquema JSON de sus parámetros (`inputSchema`). El cliente obtiene el catálogo con una solicitud `tools/list` y ejecuta una herramienta con `tools/call`. Por ejemplo, un servidor puede responder:
-
+```
 {
   "tools": [
     {
